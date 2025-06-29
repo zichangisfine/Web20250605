@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>洗牌發牌示範</title>
+  <style>
+    body { font-family: 微軟正黑體; text-align: center; padding: 20px; }
+    button { padding: 10px 20px; margin: 10px; font-size: 16px; }
+    #card { font-size: 24px; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>洗牌發牌示範</h1>
+  <button onclick="shuffleDeck()">洗牌</button>
+  <button onclick="dealCard()">發牌</button>
+  <div id="card">請先按「洗牌」</div>
+  <div id="remaining"></div>
+
+  <script>
+    let deck = [];
+
+    function createDeck() {
+      const suits = ['??', '??', '??', '??'];
+      const ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+      let newDeck = [];
+      for (let suit of suits) {
+        for (let rank of ranks) {
+          newDeck.push(suit + rank);
+        }
+      }
+      return newDeck;
+    }
+
+    function shuffleDeck() {
+      deck = createDeck();
+      for (let i = deck.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [deck[i], deck[j]] = [deck[j], deck[i]]; // ES6 swap
+      }
+      document.getElementById('card').innerText = '已洗牌，請按「發牌」';
+      updateRemaining();
+    }
+
+    function dealCard() {
+      if (deck.length === 0) {
+        document.getElementById('card').innerText = '牌已發完，請按「洗牌」重新開始';
+        return;
+      }
+      const card = deck.pop();
+      document.getElementById('card').innerText = '發出: ' + card;
+      updateRemaining();
+    }
+
+    function updateRemaining() {
+      document.getElementById('remaining').innerText = '剩餘張數: ' + deck.length;
+    }
+  </script>
+</body>
+</html>
