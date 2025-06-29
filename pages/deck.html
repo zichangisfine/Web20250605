@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="BIG5">
-  <title>¬~µPµoµP¥Ü½d</title>
+  <meta charset="UTF-8">
+  <title>æ´—ç‰Œç™¼ç‰Œç¤ºç¯„</title>
   <style>
-    body { font-family: ·L³n¥¿¶ÂÅé; text-align: center; padding: 20px; }
+    body { font-family: å¾®è»Ÿæ­£é»‘é«”; text-align: center; padding: 20px; }
     button { padding: 10px 20px; margin: 10px; font-size: 16px; }
     #card { font-size: 24px; margin-top: 20px; }
   </style>
 </head>
 <body>
-  <h1>¬~µPµoµP¥Ü½d</h1>
-  <button onclick="shuffleDeck()">¬~µP</button>
-  <button onclick="dealCard()">µoµP</button>
-  <div id="card">½Ğ¥ı«ö¡u¬~µP¡v</div>
+  <h1>æ´—ç‰Œç™¼ç‰Œç¤ºç¯„</h1>
+  <button onclick="shuffleDeck()">æ´—ç‰Œ</button>
+  <button onclick="dealCard()">ç™¼ç‰Œ</button>
+  <div id="card">è«‹å…ˆæŒ‰ã€Œæ´—ç‰Œã€</div>
   <div id="remaining"></div>
 
   <script>
@@ -37,22 +37,22 @@
         const j = Math.floor(Math.random() * (i + 1));
         [deck[i], deck[j]] = [deck[j], deck[i]]; // ES6 swap
       }
-      document.getElementById('card').innerText = '¤w¬~µP¡A½Ğ«ö¡uµoµP¡v';
+      document.getElementById('card').innerText = 'å·²æ´—ç‰Œï¼Œè«‹æŒ‰ã€Œç™¼ç‰Œã€';
       updateRemaining();
     }
 
     function dealCard() {
       if (deck.length === 0) {
-        document.getElementById('card').innerText = 'µP¤wµo§¹¡A½Ğ«ö¡u¬~µP¡v­«·s¶}©l';
+        document.getElementById('card').innerText = 'ç‰Œå·²ç™¼å®Œï¼Œè«‹æŒ‰ã€Œæ´—ç‰Œã€é‡æ–°é–‹å§‹';
         return;
       }
       const card = deck.pop();
-      document.getElementById('card').innerText = 'µo¥X: ' + card;
+      document.getElementById('card').innerText = 'ç™¼å‡º: ' + card;
       updateRemaining();
     }
 
     function updateRemaining() {
-      document.getElementById('remaining').innerText = '³Ñ¾l±i¼Æ: ' + deck.length;
+      document.getElementById('remaining').innerText = 'å‰©é¤˜å¼µæ•¸: ' + deck.length;
     }
   </script>
 </body>
