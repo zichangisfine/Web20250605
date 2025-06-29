@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>圖片洗牌發牌與手牌顯示</title>
+<style>
+  body { font-family: 微軟正黑體; text-align: center; padding: 20px; }
+  button { padding: 10px 20px; margin: 10px; font-size: 16px; }
+  #hand {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+    border: 2px solid #333;
+    padding: 10px;
+    min-height: 120px;
+  }
+  #hand img {
+    width: 80px;
+    height: auto;
+    border: 1px solid #aaa;
+    border-radius: 8px;
+  }
+</style>
+</head>
+<body>
+
+<h1>圖片洗牌發牌示範</h1>
+<button onclick="shuffleDeck()">洗牌</button>
+<button onclick="dealCard()">發牌</button>
+<p id="remaining">剩餘張數: 0</p>
+
+<h2>🃏 我的手牌</h2>
+<div id="hand"></div>
+
+<script>
+let deck = [];
+const totalCards = 13; // 範例：可依需要放更多圖片
+
+function createDeck() {
+    let newDeck = [];
+    for (let i = 1; i <= totalCards; i++) {
+        // 若有放置自己的圖片，可改成：
+        newDeck.push(`cards/C${i}.jpg`);
+    }
+    return newDeck;
+}
+
+function shuffleDeck() {
+    deck = createDeck();
+    for (let i = deck.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [deck[i], deck[j]] = [deck[j], deck[i]];
+    }
+    document.getElementById('hand').innerHTML = '';
+    updateRemaining();
+}
+
+function dealCard() {
+    if (deck.length === 0) {
+        alert("牌已發完，請重新洗牌");
+        return;
+    }
+    const cardImgSrc = deck.pop();
+    const img = document.createElement('img');
+    img.src = cardImgSrc;
+    document.getElementById('hand').appendChild(img);
+    updateRemaining();
+}
+
+function updateRemaining() {
+    document.getElementById('remaining').innerText = '剩餘張數: ' + deck.length;
+}
+
+// 初始顯示
+updateRemaining();
+</script>
+
+</body>
+</html>
